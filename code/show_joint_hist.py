@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.colors import LogNorm
 
 DATA_FOLDER = "data"
 COUPLES = [
@@ -33,7 +34,7 @@ def show_hist_with_margin(hist, bin=256):
     ax_marg_J = fig.add_subplot(gs[1, 0], sharey=ax_joint)
     ax_colorbar = fig.add_subplot(gs[1, 2])
 
-    im = ax_joint.imshow(hist, origin="lower")
+    im = ax_joint.imshow(hist, origin="lower", norm=LogNorm())
     ax_joint.set_xlabel("I")
     ax_marg_J.set_ylabel("J")
 
