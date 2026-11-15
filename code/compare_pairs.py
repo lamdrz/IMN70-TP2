@@ -32,9 +32,12 @@ def IM(I, J):
     P_i = np.sum(P_ij, axis=1)
     P_j = np.sum(P_ij, axis=0)
 
-    P_i_P_j = P_i[:, None] * P_j[None, :]
     mask = P_ij > 0 # Pour log
-    return np.sum(P_ij[mask] * np.log2(P_ij[mask] / P_i_P_j[mask]))
+    return np.sum(P_ij[mask] * np.log(P_ij[mask] / (P_i[:, None] * P_j[None, :])[mask]))
+
+def sklearn_im(I, J):
+    from sklearn.metrics import mutual_info_score
+    return mutual_info_score(I.flatten(), J.flatten())
 
 
 if __name__ == "__main__":
@@ -48,3 +51,4 @@ if __name__ == "__main__":
         cr_ij = cr(i, j)
         im_ij = IM(i, j)
         print(f"SSD: {ssd_ij}, CR: {cr_ij}, IM: {im_ij}")
+        assert np.isclose(im_ij, sklearn_im(i, j)), "IM != sklearn IM" # Pour verifier si notre fonction est correcte

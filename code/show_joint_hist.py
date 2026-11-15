@@ -9,6 +9,9 @@ COUPLES = [
     (f"{DATA_FOLDER}/I{n}.jpg", f"{DATA_FOLDER}/J{n}.jpg") for n in range(2, 7)
 ]
 
+def np_joint_hist(I, J, bin):
+    return np.histogram2d(I.flatten(), J.flatten(), bins=bin, range=[[0, 256], [0, 256]])[0].astype(int)
+
 def joint_hist(I,  J,  bin):
     I_bin = np.floor(I / (256 / bin)).astype(int).flatten()
     J_bin = np.floor(J / (256 / bin)).astype(int).flatten()
@@ -59,4 +62,5 @@ if __name__ == "__main__":
 
         hist = joint_hist(i, j, 256)
         show_hist_with_margin(hist, 256)
+        # show_hist_with_margin(np_joint_hist(i, j, 256), 256) # Pour comparer
         check_sum(i, j, hist)
