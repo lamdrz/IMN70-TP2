@@ -109,8 +109,8 @@ def show_3d_grid_compare(grid_points, transformed_grid_points):
     fig = plt.figure(figsize=(8, 8))
     ax = fig.add_subplot(111, projection='3d')
 
-    ax.scatter(x_points, y_points, z_points, c='blue', marker='o', alpha=0.6, label='Original Grid')
-    ax.scatter(x_transformed_points, y_transformed_points, z_transformed_points, c='red', marker='x', alpha=0.6, label='Transformed Grid')
+    ax.scatter(x_points, y_points, z_points, c='blue', marker='o', alpha=0.6, label='grille originale')
+    ax.scatter(x_transformed_points, y_transformed_points, z_transformed_points, c='red', marker='x', alpha=0.6, label='grille transformée')
 
     ax.set_xlabel('Axe X')
     ax.set_ylabel('Axe Y')
